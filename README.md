@@ -1,4 +1,4 @@
-# treehouse-mongo-basics
+# Learn MongoDB
 ## How To
 ```
 # open the mongo shell
