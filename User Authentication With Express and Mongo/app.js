@@ -5,6 +5,7 @@ const app = express();
 
 // connect to mongodb
 mongoose.connect('mongodb://localhost:27017/bookworm', {useNewUrlParser: true});
+mongoose.set('useCreateIndex', true);
 const db = mongoose.connection;
 
 // parse incoming requests
