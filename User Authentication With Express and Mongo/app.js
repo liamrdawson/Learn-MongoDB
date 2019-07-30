@@ -1,6 +1,11 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const app = express();
+
+// connect to mongodb
+mongoose.connect('mongodb://localhost:27017/bookworm', {useNewUrlParser: true});
+const db = mongoose.connection;
 
 // parse incoming requests
 app.use(bodyParser.json());
