@@ -21,6 +21,23 @@ router.post('/register', function(req, res, next) {
           err.status = 400;
           return next(err);
         } 
+
+        let userData = {
+          email : req.body.email, 
+          name  : req.body.name,
+          favouriteBook : req.body.favouriteBook,
+          password : req.body.password
+        };
+
+        //  Use schema create method to insert document into Mongo
+        User.create(userData, function (error, user) {
+          if (error) {
+            return next(error);
+          } else {
+            return res.redirect('/profile');
+          }
+        })
+
     } else {
       let err = new Error('Please complete all fields');
       err.status = 400;
