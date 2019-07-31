@@ -14,10 +14,13 @@ router.post('/register', function(req, res, next) {
       req.body.favouriteBook &&
       req.body.password &&
       req.body.confirmPassword) {
+
         //confirm that the password has been entered twice identically
         if (req.body.password !== req.body.confirmPassword) {
-          let err = new Error('Passwords do not match');
-        }
+          let err = new Error('Password does not match');
+          err.status = 400;
+          return next(err);
+        } 
     } else {
       let err = new Error('Please complete all fields');
       err.status = 400;
