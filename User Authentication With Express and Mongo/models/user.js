@@ -1,5 +1,5 @@
-let mongoose = require('mongoose');
-
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 let UserSchema = new mongoose.Schema({
     email: {
@@ -21,7 +21,23 @@ let UserSchema = new mongoose.Schema({
     favouriteBook: {
         type: String, 
         required: true, 
+    },
+    password: {
+        type: String, 
+        required: true
     }
+});
+
+//  Hash password before saving to the database
+UserSchema.pre('save', function(next){
+    const user = this;
+    bcrypt.hash(user.password, 10, function(err, hash) {
+        if (err) {
+            return next(err);
+        }
+        user.password = hash;
+        next();
+    })
 });
 
 let User = mongoose.model( 'User', UserSchema );
