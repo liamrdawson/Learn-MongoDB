@@ -14,11 +14,24 @@ router.get('/profile', function(req, res, next) {
         if (error) {
           return next(error);
         } else {
-          return res.render('profile', { title: 'Profile', name: user.name, favorite: user.favoriteBook });
+          return res.render('profile', { title: 'Profile', name: user.name, favourite: user.favouriteBook });
         }
       });
 });
 
+// GET /logout
+router.get('/logout', function(req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if(err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
 
 //  GET /login
 router.get('/login', function(req, res, next) {
